@@ -22,12 +22,17 @@ const resourceTypeLabels: Record<ResourceType, string> = {
   other: "other",
 };
 
+const secondaryTextStyle = {
+  color: "#525252",
+  "font-size": "13px",
+} as const;
+
 export function ResourceTypeEditor(props: ResourceTypeEditorProps) {
   return (
     <section style={{ display: "grid", gap: "10px" }}>
       <div style={{ display: "grid", gap: "4px" }}>
         <h3 style={{ margin: "0", "font-size": "16px" }}>対象resource type</h3>
-        <p style={{ margin: "0", color: "#6b7280", "font-size": "13px" }}>適用したいリクエスト種別を選択する。</p>
+        <p style={{ margin: "0", ...secondaryTextStyle }}>適用したいリクエスト種別を選択する。</p>
       </div>
 
       <div style={{ display: "grid", gap: "8px", "grid-template-columns": "repeat(auto-fit, minmax(160px, 1fr))" }}>

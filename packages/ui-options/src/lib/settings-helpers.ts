@@ -4,6 +4,7 @@ import {
   type ExtensionSettings,
   type HeaderEntry,
   type ResourceType,
+  isValidMatchPattern,
 } from "@header-injector/core";
 
 let headerIdCounter = 0;
@@ -50,12 +51,27 @@ export function isSettingsEqual(left: ExtensionSettings, right: ExtensionSetting
   return left.headers.every((header, index) => isHeaderEqual(header, right.headers[index]));
 }
 
+export function canToggleEnabledImmediately(hasUnsavedChanges: boolean): boolean {
+  return !hasUnsavedChanges;
+}
+
+export function createEnabledSettings(settings: ExtensionSettings, enabled: boolean): ExtensionSettings {
+  return {
+    ...cloneSettings(settings),
+    enabled,
+  };
+}
+
 export function appendPattern(patterns: readonly string[]): string[] {
   return [...patterns, ""];
 }
 
 export function replacePattern(patterns: readonly string[], index: number, value: string): string[] {
   return patterns.map((pattern, patternIndex) => (patternIndex === index ? value : pattern));
+}
+
+export function getPatternValidationStates(patterns: readonly string[]): boolean[] {
+  return patterns.map((pattern) => isValidMatchPattern(pattern));
 }
 
 export function deletePattern(patterns: readonly string[], index: number): string[] {

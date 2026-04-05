@@ -17,7 +17,15 @@ import { PatternListEditor } from "./components/pattern-list-editor";
 import { ResourceTypeEditor } from "./components/resource-type-editor";
 import { SettingsForm } from "./components/settings-form";
 import { ValidationSummary } from "./components/validation-summary";
-import { cloneSettings, createHeaderId, isSettingsEqual, replaceResourceType } from "./lib/settings-helpers";
+import {
+  canToggleEnabledImmediately,
+  cloneSettings,
+  createEnabledSettings,
+  createHeaderId,
+  getPatternValidationStates,
+  isSettingsEqual,
+  replaceResourceType,
+} from "./lib/settings-helpers";
 import { toValidationMessage } from "./lib/validation-messages";
 
 export interface SettingsRepository {
@@ -31,7 +39,7 @@ export interface AppProps {
 }
 
 const panelStyle = {
-  border: "1px solid #d1d5db",
+  border: "1px solid #d4d4d8",
   "border-radius": "12px",
   padding: "16px",
   "background-color": "#ffffff",
@@ -43,15 +51,44 @@ const pageStyle = {
   "max-width": "960px",
   display: "grid",
   gap: "16px",
-  color: "#111827",
+  color: "#111111",
   "font-family": '"Hiragino Sans", "Noto Sans JP", sans-serif',
-  "background-color": "#f9fafb",
+  "background-color": "#ffffff",
 } as const;
 
 const bannerBaseStyle = {
   padding: "12px 14px",
   "border-radius": "10px",
   "font-size": "14px",
+} as const;
+
+const neutralBannerStyle = {
+  ...bannerBaseStyle,
+  border: "1px solid #d4d4d8",
+  "background-color": "#fafafa",
+  color: "#111111",
+} as const;
+
+const secondaryTextStyle = {
+  color: "#525252",
+} as const;
+
+const buttonBaseStyle = {
+  height: "42px",
+  "box-sizing": "border-box",
+  "line-height": "1.5",
+  padding: "10px 16px",
+  border: "1px solid #d4d4d8",
+  "border-radius": "8px",
+  "background-color": "#ffffff",
+  color: "#111111",
+} as const;
+
+const primaryButtonStyle = {
+  ...buttonBaseStyle,
+  border: "1px solid #111111",
+  "background-color": "#111111",
+  color: "#ffffff",
 } as const;
 
 export function App(props: AppProps) {
@@ -69,6 +106,7 @@ export function App(props: AppProps) {
   });
   const [isLoaded, setIsLoaded] = createSignal(false);
   const [isSaving, setIsSaving] = createSignal(false);
+  const [isTogglingEnabled, setIsTogglingEnabled] = createSignal(false);
   const [saveError, setSaveError] = createSignal<string | null>(null);
   const [saveSuccess, setSaveSuccess] = createSignal<string | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);
@@ -76,8 +114,14 @@ export function App(props: AppProps) {
 
   const validationIssues = createMemo(() => (isLoaded() ? validateSettings(draftSettings) : []));
   const dirty = createMemo(() => (isLoaded() ? !isSettingsEqual(savedSettings, draftSettings) : false));
-  const canSave = createMemo(() => dirty() && validationIssues().length === 0 && !isSaving());
+  const canSave = createMemo(() => dirty() && validationIssues().length === 0 && !isSaving() && !isTogglingEnabled());
+  const canReset = createMemo(() => dirty() && !isSaving() && !isTogglingEnabled());
+  const canToggleEnabled = createMemo(
+    () => isLoaded() && canToggleEnabledImmediately(dirty()) && !isSaving() && !isTogglingEnabled(),
+  );
   const hasPendingExternalUpdate = createMemo(() => pendingExternalSettings() !== null);
+  const includePatternValidationStates = createMemo(() => getPatternValidationStates(draftSettings.target.includePatterns));
+  const excludePatternValidationStates = createMemo(() => getPatternValidationStates(draftSettings.target.excludePatterns));
 
   const headerIssueMessages = createMemo(() => {
     const messages = new Map<string, string[]>();
@@ -159,6 +203,29 @@ export function App(props: AppProps) {
     }
   }
 
+  async function handleEnabledToggle(nextEnabled: boolean) {
+    if (!canToggleEnabled()) {
+      return;
+    }
+
+    setIsTogglingEnabled(true);
+    setSaveError(null);
+    setSaveSuccess(null);
+
+    try {
+      const nextSettings = createEnabledSettings(savedSettings, nextEnabled);
+      await props.repo.save(nextSettings);
+      applySavedSettings(nextSettings);
+      applyDraftSettings(nextSettings);
+      setPendingExternalSettings(null);
+      setSaveSuccess("有効状態を更新した");
+    } catch {
+      setSaveError("有効状態の更新に失敗した");
+    } finally {
+      setIsTogglingEnabled(false);
+    }
+  }
+
   function handleReset() {
     applyDraftSettings(savedSettings);
     setSaveError(null);
@@ -226,21 +293,24 @@ export function App(props: AppProps) {
     setSaveSuccess(null);
   }
 
-  function patternMessages(field: "includePatterns" | "excludePatterns", pattern: string): string[] {
-    return validationIssues()
-      .filter((issue) => issue.type === "invalid-pattern" && issue.field === field && issue.pattern === pattern)
-      .map((issue) => toValidationMessage(issue));
-  }
-
   const summaryMessages = createMemo(() => validationIssues().map((issue) => toValidationMessage(issue)));
+  const includePatternMessages = createMemo(() =>
+    draftSettings.target.includePatterns.map((pattern, index) =>
+      includePatternValidationStates()[index]
+        ? []
+        : [toValidationMessage({ type: "invalid-pattern", field: "includePatterns", pattern })],
+    ),
+  );
+  const excludePatternMessages = createMemo(() =>
+    draftSettings.target.excludePatterns.map((pattern, index) =>
+      excludePatternValidationStates()[index]
+        ? []
+        : [toValidationMessage({ type: "invalid-pattern", field: "excludePatterns", pattern })],
+    ),
+  );
 
   return (
     <main style={pageStyle}>
-      <header style={{ display: "grid", gap: "4px" }}>
-        <h1 style={{ margin: "0", "font-size": "28px" }}>Header Injector</h1>
-        <p style={{ margin: "0", color: "#4b5563" }}>リクエストヘッダーの付与条件と値を設定する。</p>
-      </header>
-
       <Show when={loadError()}>
         {(message) => (
           <div style={{ ...bannerBaseStyle, "background-color": "#fef2f2", color: "#991b1b" }} role="alert">
@@ -250,16 +320,69 @@ export function App(props: AppProps) {
       </Show>
 
       <Show when={!isLoaded() && !loadError()}>
-        <div style={{ ...bannerBaseStyle, "background-color": "#eff6ff", color: "#1d4ed8" }}>設定を読み込み中...</div>
+        <div style={neutralBannerStyle}>設定を読み込み中...</div>
       </Show>
 
       <Show when={isLoaded()}>
         <SettingsForm onSubmit={handleSave}>
+          <header
+            style={{
+              display: "flex",
+              "justify-content": "space-between",
+              "align-items": "flex-start",
+              gap: "16px",
+              "flex-wrap": "wrap",
+            }}
+          >
+            <div style={{ display: "grid", gap: "4px" }}>
+              <h1 style={{ margin: "0", "font-size": "28px" }}>Header Injector</h1>
+              <p style={{ margin: "0", ...secondaryTextStyle }}>リクエストヘッダーの付与条件と値を設定する。</p>
+            </div>
+
+            <div style={{ display: "flex", gap: "12px", "align-items": "center", "flex-wrap": "wrap" }}>
+              <button
+                style={{
+                  ...buttonBaseStyle,
+                  cursor: canReset() ? "pointer" : "not-allowed",
+                  opacity: canReset() ? "1" : "0.5",
+                }}
+                disabled={!canReset()}
+                type="button"
+                onClick={handleReset}
+              >
+                リセット
+              </button>
+              <button
+                style={{
+                  ...(canSave() ? primaryButtonStyle : buttonBaseStyle),
+                  cursor: canSave() ? "pointer" : "not-allowed",
+                  opacity: canSave() ? "1" : "0.5",
+                }}
+                disabled={!canSave()}
+                type="submit"
+              >
+                <Show when={isSaving()} fallback="保存">
+                  保存中...
+                </Show>
+              </button>
+            </div>
+          </header>
+
           <Show when={hasPendingExternalUpdate()}>
             <div style={{ ...bannerBaseStyle, "background-color": "#fff7ed", color: "#9a3412" }} role="alert">
               <div>外部で設定が更新された。</div>
               <button
-                style={{ margin: "8px 0 0", padding: "8px 12px", "border-radius": "8px", border: "1px solid #fdba74" }}
+                style={{
+                  height: "42px",
+                  "box-sizing": "border-box",
+                  "line-height": "1.5",
+                  margin: "8px 0 0",
+                  padding: "10px 14px",
+                  "border-radius": "8px",
+                  border: "1px solid #fdba74",
+                  "background-color": "#ffffff",
+                  color: "#9a3412",
+                }}
                 type="button"
                 onClick={reloadPendingExternalSettings}
               >
@@ -278,7 +401,7 @@ export function App(props: AppProps) {
 
           <Show when={saveSuccess()}>
             {(message) => (
-              <div style={{ ...bannerBaseStyle, "background-color": "#ecfdf5", color: "#166534" }} role="status">
+              <div style={neutralBannerStyle} role="status">
                 {message()}
               </div>
             )}
@@ -288,23 +411,27 @@ export function App(props: AppProps) {
             <label style={{ display: "flex", gap: "12px", "align-items": "center" }}>
               <input
                 checked={draftSettings.enabled}
+                disabled={!canToggleEnabled()}
                 type="checkbox"
                 onInput={(event) => {
-                  setDraftSettings("enabled", event.currentTarget.checked);
-                  setSaveSuccess(null);
+                  void handleEnabledToggle(event.currentTarget.checked);
                 }}
               />
-              <span style={{ "font-weight": "600" }}>設定を有効にする</span>
+              <span style={{ "font-weight": "600" }}>設定を有効化</span>
             </label>
+            <Show when={dirty()}>
+              <p style={{ margin: "10px 0 0", "font-size": "13px", ...secondaryTextStyle }}>
+                未保存の変更があるため、保存またはリセット後に切り替えできる。
+              </p>
+            </Show>
           </section>
 
           <section style={panelStyle}>
             <h2 style={{ margin: "0 0 12px", "font-size": "20px" }}>一致条件</h2>
             <div style={{ display: "grid", gap: "16px" }}>
               <PatternListEditor
-                field="includePatterns"
                 label="適用対象URL"
-                messagesForPattern={(pattern) => patternMessages("includePatterns", pattern)}
+                messagesForPattern={(index) => includePatternMessages()[index] ?? []}
                 patterns={draftSettings.target.includePatterns}
                 onAdd={() => addPattern("includePatterns")}
                 onRemove={(index) => removePattern("includePatterns", index)}
@@ -312,9 +439,8 @@ export function App(props: AppProps) {
               />
 
               <PatternListEditor
-                field="excludePatterns"
                 label="除外URL"
-                messagesForPattern={(pattern) => patternMessages("excludePatterns", pattern)}
+                messagesForPattern={(index) => excludePatternMessages()[index] ?? []}
                 patterns={draftSettings.target.excludePatterns}
                 onAdd={() => addPattern("excludePatterns")}
                 onRemove={(index) => removePattern("excludePatterns", index)}
@@ -342,31 +468,6 @@ export function App(props: AppProps) {
 
           <section style={panelStyle}>
             <ValidationSummary messages={summaryMessages()} />
-            <div style={{ display: "flex", gap: "12px", "justify-content": "flex-end", "margin-top": "16px" }}>
-              <button
-                style={{ padding: "10px 16px", border: "1px solid #d1d5db", "border-radius": "8px", "background-color": "#ffffff" }}
-                type="button"
-                onClick={handleReset}
-              >
-                リセット
-              </button>
-              <button
-                style={{
-                  padding: "10px 16px",
-                  border: "1px solid #2563eb",
-                  "border-radius": "8px",
-                  "background-color": canSave() ? "#2563eb" : "#93c5fd",
-                  color: "#ffffff",
-                  cursor: canSave() ? "pointer" : "not-allowed",
-                }}
-                disabled={!canSave()}
-                type="submit"
-              >
-                <Show when={isSaving()} fallback="保存">
-                  保存中...
-                </Show>
-              </button>
-            </div>
           </section>
         </SettingsForm>
       </Show>
