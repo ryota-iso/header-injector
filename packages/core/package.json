@@ -1,0 +1,18 @@
+{
+  "name": "@header-injector/core",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "vp pack src/index.ts --dts",
+    "check": "vp check src package.json",
+    "check:fix": "vp check --fix src package.json",
+    "test": "vp test run --passWithNoTests --environment node"
+  },
+  "devDependencies": {
+    "typescript": "catalog:build",
+    "vitest": "catalog:test"
+  }
+}
