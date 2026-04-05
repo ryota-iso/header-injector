@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "vp build",
-    "check": "vp check src background options shared package.json vite.config.ts index.html",
-    "check:fix": "vp check --fix src background options shared package.json vite.config.ts index.html",
+    "build": "node scripts/build-extension.mjs all",
+    "build:chrome": "node scripts/build-extension.mjs chrome",
+    "build:safari": "node scripts/build-extension.mjs safari",
+    "check": "vp check",
+    "check:fix": "vp check --fix",
     "test": "vp test run --passWithNoTests --environment node"
   },
   "dependencies": {

@@ -7,8 +7,8 @@
   },
   "scripts": {
     "build": "vp pack src/index.ts --dts",
-    "check": "vp check src package.json vite.config.ts",
-    "check:fix": "vp check --fix src package.json vite.config.ts",
+    "check": "vp check",
+    "check:fix": "vp check --fix",
     "test": "vp test run --passWithNoTests --environment node"
   },
   "dependencies": {
