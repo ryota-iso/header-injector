@@ -7,11 +7,12 @@
   },
   "scripts": {
     "build": "vp pack src/index.ts --dts",
-    "check": "vp check src package.json",
-    "check:fix": "vp check --fix src package.json",
+    "check": "vp check src package.json vite.config.ts",
+    "check:fix": "vp check --fix src package.json vite.config.ts",
     "test": "vp test run --passWithNoTests --environment node"
   },
   "dependencies": {
+    "@header-injector/core": "workspace:*",
     "solid-js": "catalog:runtime"
   },
   "devDependencies": {

@@ -75,6 +75,9 @@ importers:
 
   packages/ui-options:
     dependencies:
+      '@header-injector/core':
+        specifier: workspace:*
+        version: link:../core
       solid-js:
         specifier: catalog:runtime
         version: 1.9.12
