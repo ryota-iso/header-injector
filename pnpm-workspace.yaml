@@ -2,6 +2,18 @@ packages:
   - apps/*
   - packages/*
 
-strictDepBuilds: true
+catalogMode: strict
+cleanupUnusedCatalogs: true
+catalogs:
+  build:
+    typescript: 6.0.2
+    vite: 8.0.3
+    vite-plugin-solid: 2.11.11
+  runtime:
+    solid-js: 1.9.12
+  tooling:
+    vite-plus: 0.1.14
 
-minimumReleaseAge: 10,080 # 7 days in minutes
+minimumReleaseAge: 10080 # 7 days in minutes
+
+strictDepBuilds: true

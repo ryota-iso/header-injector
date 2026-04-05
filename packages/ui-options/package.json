@@ -1,0 +1,20 @@
+{
+  "name": "@header-injector/ui-options",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "check": "vp check src index.html package.json tsconfig.json vite.config.ts",
+    "check:fix": "vp check --fix src index.html package.json tsconfig.json vite.config.ts",
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "solid-js": "catalog:runtime"
+  },
+  "devDependencies": {
+    "typescript": "catalog:build",
+    "vite": "catalog:build",
+    "vite-plugin-solid": "catalog:build"
+  }
+}

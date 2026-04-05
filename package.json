@@ -2,11 +2,17 @@
   "name": "header-injector",
   "version": "0.1.0",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Ryota Iso <iso@ryota.dev> (https://github.com/ryota-iso)",
-  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "dev": "vp run -r dev",
+    "build": "vp run -r build",
+    "check": "vp run -r check",
+    "check:fix": "vp run -r check:fix",
+    "test": "vp run -r test"
+  },
+  "devDependencies": {
+    "vite-plus": "catalog:tooling"
+  },
   "devEngines": {
     "runtime": [
       {
@@ -15,5 +21,6 @@
         "onFail": "download"
       }
     ]
-  }
+  },
+  "packageManager": "pnpm@10.33.0"
 }
