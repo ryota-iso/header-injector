@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "vp dev",
     "build": "vp build",
-    "check": "vp check src package.json vite.config.ts index.html",
-    "check:fix": "vp check --fix src package.json vite.config.ts index.html",
+    "check": "vp check src shared package.json vite.config.ts index.html",
+    "check:fix": "vp check --fix src shared package.json vite.config.ts index.html",
     "test": "vp test run --passWithNoTests --environment node"
   },
   "dependencies": {
