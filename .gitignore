@@ -1,0 +1,10 @@
+# dependencies
+node_modules
+
+# folder config
+.DS_Store
+
+# enviroment
+.env
+.env*
+!.env.example

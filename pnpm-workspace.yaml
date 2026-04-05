@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+  - packages/*
+
+strictDepBuilds: true
+
+minimumReleaseAge: 10,080 # 7 days in minutes
