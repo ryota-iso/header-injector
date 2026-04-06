@@ -1,7 +1,6 @@
+import { SETTINGS_STORAGE_KEY, createDefaultSettings, type ExtensionSettings } from "@header-injector/core";
 import { describe, expect, it, vi } from "vitest";
 
-import { SETTINGS_STORAGE_KEY, createDefaultSettings } from "../config";
-import type { ExtensionSettings } from "../types";
 import { ExtensionSettingsRepository, type KeyValueStorage } from "./storage";
 
 class MemoryStorage implements KeyValueStorage {

@@ -1,6 +1,6 @@
+import { createDefaultSettings } from "@header-injector/core";
 import { describe, expect, it, vi } from "vitest";
 
-import { createDefaultSettings } from "../shared/config";
 import type { HeaderEngine } from "../shared/ports/header-engine";
 import { registerBackgroundListeners, resolveBackgroundTarget, startBackground, syncRules } from "./main";
 

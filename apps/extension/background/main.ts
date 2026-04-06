@@ -1,10 +1,10 @@
+import { compileSettingsToRules, type ExtensionSettings } from "@header-injector/core";
+
 import { ChromeHeaderEngine } from "../shared/adapters/chrome/header-engine";
 import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
 import { SafariHeaderEngine } from "../shared/adapters/safari/header-engine";
 import { SafariSettingsRepository } from "../shared/adapters/safari/storage";
 import type { HeaderEngine } from "../shared/ports/header-engine";
-import { compileSettingsToRules } from "../shared/rules";
-import type { ExtensionSettings } from "../shared/types";
 
 interface BackgroundRuntimeEvent {
   addListener(listener: () => void): void;

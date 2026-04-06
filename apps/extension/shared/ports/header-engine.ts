@@ -1,5 +1,4 @@
-import type { HeaderMutationRule } from "../rules";
-import type { ResourceType } from "../types";
+import type { HeaderMutationRule, ResourceType } from "@header-injector/core";
 
 export interface HeaderEngine {
   applyRules(rules: HeaderMutationRule[]): Promise<void>;

@@ -1,5 +1,12 @@
-import { DEFAULT_RESOURCE_TYPES, SETTINGS_STORAGE_KEY, SETTINGS_VERSION, createDefaultSettings } from "../config";
-import type { ExtensionSettings, HeaderEntry, ResourceType } from "../types";
+import {
+  DEFAULT_RESOURCE_TYPES,
+  SETTINGS_STORAGE_KEY,
+  SETTINGS_VERSION,
+  createDefaultSettings,
+  type ExtensionSettings,
+  type HeaderEntry,
+  type ResourceType,
+} from "@header-injector/core";
 
 export interface KeyValueStorage {
   get<T>(key: string, fallback: T): Promise<T>;

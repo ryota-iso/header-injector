@@ -1,10 +1,10 @@
 /** @jsxImportSource solid-js */
 
+import type { ExtensionSettings } from "@header-injector/core";
 import { App as UiOptionsApp } from "@header-injector/ui-options";
 
 import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
 import { SafariSettingsRepository } from "../shared/adapters/safari/storage";
-import type { ExtensionSettings } from "../shared/types";
 
 interface SettingsRepositoryLike {
   load(): Promise<ExtensionSettings>;
