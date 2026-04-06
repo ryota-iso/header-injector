@@ -41,8 +41,9 @@ async function buildTargetBundle(buildTarget) {
       emptyOutDir: false,
       lib: {
         entry: path.resolve(rootDir, "background/main.ts"),
-        formats: ["es"],
+        formats: [buildTarget === "safari" ? "iife" : "es"],
         fileName: () => "background.js",
+        name: buildTarget === "safari" ? "HeaderInjectorBackground" : undefined,
       },
     },
   });

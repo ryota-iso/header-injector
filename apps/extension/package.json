@@ -7,6 +7,8 @@
     "build": "node scripts/build-extension.mjs all",
     "build:chrome": "node scripts/build-extension.mjs chrome",
     "build:safari": "node scripts/build-extension.mjs safari",
+    "build:safari:ios": "node scripts/safari-shell.mjs prepare",
+    "build:safari:ios:rebuild": "node scripts/safari-shell.mjs rebuild",
     "check": "vp check",
     "check:fix": "vp check --fix",
     "test": "vp test run --passWithNoTests --environment node"

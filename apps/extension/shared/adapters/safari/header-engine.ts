@@ -18,11 +18,19 @@ export class SafariHeaderEngine implements HeaderEngine {
   }
 
   async applyRules(rules: HeaderMutationRule[]): Promise<void> {
-    const currentRules = await this.#api.getDynamicRules();
-    await this.#api.updateDynamicRules({
-      removeRuleIds: currentRules.map((rule) => rule.id),
-      addRules: createDynamicRules(rules),
-    });
+    const nextRules = createDynamicRules(rules);
+
+    try {
+      const currentRules = await this.#api.getDynamicRules();
+
+      await this.#api.updateDynamicRules({
+        removeRuleIds: currentRules.map((rule) => rule.id),
+        addRules: nextRules,
+      });
+    } catch (error) {
+      console.error("[header-injector/safari] applyRules:failed", error);
+      throw error;
+    }
   }
 }
 

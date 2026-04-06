@@ -101,9 +101,14 @@ export function startBackground(
   const repository = target === "safari" ? factories.safari.createRepository() : factories.chrome.createRepository();
   const headerEngine = target === "safari" ? factories.safari.createHeaderEngine() : factories.chrome.createHeaderEngine();
 
-  return registerBackgroundListeners(runtime, repository, async () => {
+  const synchronize = async () => {
     await syncRules(repository, headerEngine);
+  };
+  synchronize().catch((error: unknown) => {
+    console.error("Failed to sync extension rules", error);
   });
+
+  return registerBackgroundListeners(runtime, repository, synchronize);
 }
 
 void startBackground();

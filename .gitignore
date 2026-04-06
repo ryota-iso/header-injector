@@ -1,6 +1,9 @@
 # dependencies
 node_modules
 dist
+apps/safari-shell/*
+!apps/safari-shell/.gitkeep
+!apps/safari-shell/README.md
 
 # folder config
 .DS_Store

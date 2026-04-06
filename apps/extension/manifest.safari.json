@@ -2,11 +2,11 @@
   "manifest_version": 3,
   "name": "Header Injector",
   "version": "0.1.0",
-  "permissions": ["storage", "declarativeNetRequest"],
+  "permissions": ["storage", "declarativeNetRequestWithHostAccess"],
   "host_permissions": ["<all_urls>"],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "options_page": "index.html",
   "action": {

@@ -105,6 +105,53 @@ describe("registerBackgroundListeners", () => {
 });
 
 describe("startBackground", () => {
+  it("開始時に1回同期してからlistener待機に入る", async () => {
+    const repository = {
+      load: vi.fn().mockResolvedValue({
+        ...createDefaultSettings(),
+        enabled: true,
+        target: {
+          includePatterns: ["https://api.example.com/*"],
+          excludePatterns: [],
+          resourceTypes: ["xmlhttprequest"],
+        },
+        headers: [{ id: "header-1", name: "X-Test", value: "1", enabled: true }],
+      }),
+      subscribe: vi.fn(() => vi.fn()),
+    };
+    const headerEngine = {
+      applyRules: vi.fn().mockResolvedValue(undefined),
+    };
+
+    startBackground(
+      {
+        browser: {
+          runtime: {
+            onInstalled: { addListener() {} },
+            onStartup: { addListener() {} },
+          },
+        },
+      },
+      {
+        safari: {
+          createRepository: () => repository,
+          createHeaderEngine: () => headerEngine,
+        },
+        chrome: {
+          createRepository: vi.fn(),
+          createHeaderEngine: vi.fn(),
+        },
+      },
+    );
+
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(repository.load).toHaveBeenCalledTimes(1);
+    expect(headerEngine.applyRules).toHaveBeenCalledTimes(1);
+    expect(repository.subscribe).toHaveBeenCalledTimes(1);
+  });
+
   it("runtimeが無い場合は何も開始しない", () => {
     const safariRepository = vi.fn();
     const chromeRepository = vi.fn();
