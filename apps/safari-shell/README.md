@@ -8,14 +8,14 @@
 - Safari 向け build が通る
 
 ```bash
-cd /Users/ryota/develop/oss/header-injector
+cd <repo-root>
 vp run @header-injector/extension#build:safari
 ```
 
 ## 初期設定
 
 ```bash
-cd /Users/ryota/develop/oss/header-injector
+cd <repo-root>
 vp run @header-injector/extension#build:safari:ios
 ```
 
@@ -28,7 +28,7 @@ vp run @header-injector/extension#build:safari:ios
 ## リビルド
 
 ```bash
-cd /Users/ryota/develop/oss/header-injector
+cd <repo-root>
 vp run @header-injector/extension#build:safari
 vp run @header-injector/extension#build:safari:ios:rebuild
 ```
