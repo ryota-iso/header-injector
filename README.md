@@ -54,4 +54,4 @@ vp run @header-injector/extension#build:safari:ios
 vp run @header-injector/extension#build:safari:ios:rebuild
 ```
 
-Safari iOS の詳細は [apps/safari-shell/README.md](/Users/ryota/develop/oss/header-injector/apps/safari-shell/README.md) を参照。
+Safari iOS の詳細は [apps/safari-shell/README.md](./apps/safari-shell/README.md) を参照。
