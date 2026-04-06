@@ -4,10 +4,11 @@ WebExtension ベースの request header 付与ツール。
 
 主な用途:
 
-特定環境向けの request header 付与
-ex: `aws-cf-cd-**` 系 header を使った AB テスト
+- 特定環境向けの request header 付与
+- `aws-cf-cd-**` 系 header を使った AB テスト
 
 補足:
+
 - Safari では任意の custom header は付与できない
 - Safari で付与できるのは一部の既存標準 header のみ
 - `aws-cf-cd-**` のような custom header を使う用途は実質 Chrome 系ブラウザ向け
@@ -30,6 +31,7 @@ ex: `aws-cf-cd-**` 系 header を使った AB テスト
 
 前提:
 
+- `vp` がインストール済み
 - Node.js `24.14.1`
 - pnpm `10.33.0`
 - Xcode（Safari iOS を使う場合）
@@ -37,7 +39,7 @@ ex: `aws-cf-cd-**` 系 header を使った AB テスト
 セットアップ:
 
 ```bash
-pnpm install --lockfile-only
+vp install
 vp run -r check
 vp run -r test
 ```
