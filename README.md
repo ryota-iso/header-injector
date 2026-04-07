@@ -7,7 +7,7 @@ WebExtension ベースの request header 付与ツール。
 主な用途:
 
 - 特定環境向けの request header 付与
-- `aws-cf-cd-**` 系 header を使った AB テスト
+  - ex: `aws-cf-cd-**` 系 header を使った AB テスト
 
 補足:
 
@@ -42,18 +42,16 @@ WebExtension ベースの request header 付与ツール。
 
 ```bash
 vp install
-vp run -r check
-vp run -r test
 ```
 
 主要コマンド:
 
 ```bash
-vp run @header-injector/extension#build
-vp run @header-injector/extension#build:chrome
-vp run @header-injector/extension#build:safari
-vp run @header-injector/extension#build:safari:ios
-vp run @header-injector/extension#build:safari:ios:rebuild
+vp run @header-injector/extension#build                     # build all
+vp run @header-injector/extension#build:chrome              # build Chrome
+vp run @header-injector/extension#build:safari              # build Safari
+vp run @header-injector/extension#build:safari:ios          # build Safari iOS
+vp run @header-injector/extension#build:safari:ios:rebuild  # build Safari iOS with clean
 ```
 
 Safari iOS の詳細は [apps/safari-shell/README.md](./apps/safari-shell/README.md) を参照。
