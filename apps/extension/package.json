@@ -14,11 +14,11 @@
     "test": "vp test run --passWithNoTests --environment node"
   },
   "dependencies": {
-    "@header-injector/core": "workspace:*",
-    "@header-injector/ui-options": "workspace:*",
     "solid-js": "catalog:runtime"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "catalog:build",
+    "tailwindcss": "catalog:build",
     "typescript": "catalog:build",
     "vite": "catalog:build",
     "vite-plugin-solid": "catalog:build",

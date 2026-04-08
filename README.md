@@ -20,11 +20,8 @@ WebExtension ベースの request header 付与ツール。
 ```text
 .
 ├── apps/
-│   ├── extension/      # Chrome / Safari 向け拡張本体
+│   ├── extension/      # Chrome / Safari 向け拡張本体（設定画面 UI と core ロジックを含む）
 │   └── safari-shell/   # Safari iOS 向け Xcode shell
-├── packages/
-│   ├── core/           # 型、validation、rule 変換
-│   └── ui-options/     # 設定画面 UI
 ├── package.json
 └── pnpm-workspace.yaml
 ```

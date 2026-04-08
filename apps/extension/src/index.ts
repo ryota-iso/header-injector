@@ -1,1 +1,1 @@
-import "../options";
+import "./options";

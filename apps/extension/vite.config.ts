@@ -2,8 +2,11 @@
 
 import { defineConfig } from "vite-plus";
 import solidPlugin from "vite-plugin-solid";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  root: "./src",
+  publicDir: "../public",
   base: "./",
   lint: {
     ignorePatterns: ["dist/**"],
@@ -11,7 +14,7 @@ export default defineConfig({
   fmt: {
     ignorePatterns: ["dist/**"],
   },
-  plugins: [solidPlugin()],
+  plugins: [tailwindcss(), solidPlugin()],
   resolve: {
     conditions: ["development", "browser"],
   },
