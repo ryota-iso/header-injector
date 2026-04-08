@@ -34,6 +34,6 @@ export function createDefaultSettings(): ExtensionSettings {
       excludePatterns: [],
       resourceTypes: [...DEFAULT_RESOURCE_TYPES],
     },
-    headers: [createDefaultHeaderEntry("header-1")],
+    headers: [],
   };
 }

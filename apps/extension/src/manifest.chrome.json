@@ -1,16 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Header Injector",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "マッチした URL パターンのリクエストに任意の HTTP ヘッダーを付与する WebExtension",
+  "homepage_url": "https://github.com/ryota-iso/header-injector",
   "permissions": ["storage", "declarativeNetRequestWithHostAccess"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
-  "options_page": "index.html",
   "action": {
-    "default_title": "Header Injector"
+    "default_title": "Header Injector",
+    "default_popup": "index.html"
   },
   "icons": {
     "16": "icons/extension_icon16.png",
