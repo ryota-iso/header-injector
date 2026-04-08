@@ -311,7 +311,6 @@ export function OptionsView(props: OptionsViewProps) {
 
   return (
     <main style={pageStyle}>
-      <h1 class="text-2xl font-bold text-red-500">test</h1>
       <Show when={loadError()}>
         {(message) => (
           <div style={{ ...bannerBaseStyle, "background-color": "#fef2f2", color: "#991b1b" }} role="alert">
