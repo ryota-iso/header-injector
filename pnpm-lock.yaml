@@ -45,7 +45,7 @@ importers:
         specifier: catalog:tooling
         version: 0.1.14(jiti@2.6.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(jiti@2.6.1))
 
-  extension:
+  apps/extension:
     dependencies:
       solid-js:
         specifier: catalog:runtime

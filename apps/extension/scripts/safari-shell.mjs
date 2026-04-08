@@ -33,7 +33,9 @@ async function ensureSafariBuildExists() {
   try {
     await access(path.resolve(safariDistDir, "manifest.json"));
   } catch {
-    throw new Error("extension/dist/safari が見つからない。先に `vp run @header-injector/extension#build:safari` を実行すること。");
+    throw new Error(
+      "apps/extension/dist/safari が見つからない。先に `vp run @header-injector/extension#build:safari` を実行すること。",
+    );
   }
 }
 

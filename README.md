@@ -19,8 +19,9 @@ WebExtension ベースの request header 付与ツール。
 
 ```text
 .
-├── extension/          # Chrome / Safari 向け拡張本体（設定画面 UI と core ロジックを含む）
-├── safari-shell/       # Safari iOS 向け Xcode shell
+├── apps/
+│   ├── extension/      # Chrome / Safari 向け拡張本体（設定画面 UI と core ロジックを含む）
+│   └── safari-shell/   # Safari iOS 向け Xcode shell
 ├── package.json
 └── pnpm-workspace.yaml
 ```
@@ -50,4 +51,4 @@ vp run @header-injector/extension#build:safari:ios          # build Safari iOS
 vp run @header-injector/extension#build:safari:ios:rebuild  # build Safari iOS with clean
 ```
 
-Safari iOS の詳細は [safari-shell/README.md](./safari-shell/README.md) を参照。
+Safari iOS の詳細は [apps/safari-shell/README.md](./apps/safari-shell/README.md) を参照。
