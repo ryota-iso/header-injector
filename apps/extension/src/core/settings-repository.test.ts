@@ -1,7 +1,9 @@
-import { SETTINGS_STORAGE_KEY, createDefaultSettings, type ExtensionSettings } from "..";
 import { describe, expect, it, vi } from "vitest";
 
-import { ExtensionSettingsRepository, type KeyValueStorage } from "./storage";
+import { SETTINGS_STORAGE_KEY, createDefaultSettings } from "./config";
+import type { KeyValueStorage } from "./interfaces";
+import { ExtensionSettingsRepository } from "./settings-repository";
+import type { ExtensionSettings } from "./types";
 
 class MemoryStorage implements KeyValueStorage {
   readonly #values = new Map<string, unknown>();

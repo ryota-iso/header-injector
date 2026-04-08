@@ -1,7 +1,7 @@
 import { createDefaultSettings } from "../core";
 import { describe, expect, it, vi } from "vitest";
 
-import type { HeaderEngine } from "../core/ports/header-engine";
+import type { HeaderEngine } from "../core/interfaces";
 import { registerBackgroundListeners, resolveBackgroundTarget, startBackground, syncRules } from "./main";
 
 describe("syncRules", () => {

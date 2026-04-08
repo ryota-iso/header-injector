@@ -4,7 +4,7 @@ import { ChromeHeaderEngine } from "../core/chrome/header-engine";
 import { ChromeSettingsRepository } from "../core/chrome/storage";
 import { SafariHeaderEngine } from "../core/safari/header-engine";
 import { SafariSettingsRepository } from "../core/safari/storage";
-import type { HeaderEngine } from "../core/ports/header-engine";
+import type { HeaderEngine } from "../core/interfaces";
 
 interface BackgroundRuntimeEvent {
   addListener(listener: () => void): void;

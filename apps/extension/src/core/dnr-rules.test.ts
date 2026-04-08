@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createDynamicRules, matchPatternToDnrCondition } from "./header-engine";
+import { createDynamicRules, matchPatternToDnrCondition } from "./dnr-rules";
 
 describe("createDynamicRules", () => {
   it("include pattern複数件をmodifyHeaders rule複数件へ展開する", () => {

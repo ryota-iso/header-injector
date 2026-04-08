@@ -1,18 +1,6 @@
-import {
-  DEFAULT_RESOURCE_TYPES,
-  SETTINGS_STORAGE_KEY,
-  SETTINGS_VERSION,
-  createDefaultSettings,
-  type ExtensionSettings,
-  type HeaderEntry,
-  type ResourceType,
-} from "..";
-
-export interface KeyValueStorage {
-  get<T>(key: string, fallback: T): Promise<T>;
-  set<T>(key: string, value: T): Promise<void>;
-  watch<T>(key: string, callback: (value: T) => void): () => void;
-}
+import { DEFAULT_RESOURCE_TYPES, SETTINGS_STORAGE_KEY, SETTINGS_VERSION, createDefaultSettings } from "./config";
+import type { KeyValueStorage } from "./interfaces";
+import type { ExtensionSettings, HeaderEntry, ResourceType } from "./types";
 
 export class ExtensionSettingsRepository {
   readonly #storage: KeyValueStorage;

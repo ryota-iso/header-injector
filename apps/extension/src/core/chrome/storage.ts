@@ -1,4 +1,5 @@
-import { ExtensionSettingsRepository, type KeyValueStorage } from "../ports/storage";
+import type { KeyValueStorage } from "../interfaces";
+import { ExtensionSettingsRepository } from "../settings-repository";
 
 interface StorageChange {
   newValue?: unknown;

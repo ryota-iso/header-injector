@@ -1,8 +1,5 @@
-import type { HeaderMutationRule, ResourceType } from "..";
-
-export interface HeaderEngine {
-  applyRules(rules: HeaderMutationRule[]): Promise<void>;
-}
+import type { HeaderMutationRule } from "./rules";
+import type { ResourceType } from "./types";
 
 export interface DynamicRuleCondition {
   resourceTypes: ResourceType[];
