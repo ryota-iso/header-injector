@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import type { ResourceType } from "@header-injector/core";
+import type { ResourceType } from "../../../lib";
 import { For } from "solid-js";
 
 export interface ResourceTypeEditorProps {

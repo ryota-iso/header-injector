@@ -1,4 +1,4 @@
-import { createDefaultSettings } from "@header-injector/core";
+import { createDefaultSettings } from "../lib";
 import { describe, expect, it, vi } from "vitest";
 
 import type { HeaderEngine } from "../shared/ports/header-engine";

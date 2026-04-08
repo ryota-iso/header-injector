@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import type { ExtensionSettings } from "@header-injector/core";
+import type { ExtensionSettings } from "../lib";
 
 import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
 import { SafariSettingsRepository } from "../shared/adapters/safari/storage";

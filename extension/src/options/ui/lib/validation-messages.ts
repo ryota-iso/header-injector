@@ -1,4 +1,4 @@
-import type { ValidationIssue } from "@header-injector/core";
+import type { ValidationIssue } from "../../../lib";
 
 export function toValidationMessage(issue: ValidationIssue): string {
   switch (issue.type) {

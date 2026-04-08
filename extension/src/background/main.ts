@@ -1,4 +1,4 @@
-import { compileSettingsToRules, type ExtensionSettings } from "@header-injector/core";
+import { compileSettingsToRules, type ExtensionSettings } from "../lib";
 
 import { ChromeHeaderEngine } from "../shared/adapters/chrome/header-engine";
 import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";

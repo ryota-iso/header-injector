@@ -1,6 +1,6 @@
 /** @jsxImportSource solid-js */
 
-import type { HeaderEntry } from "@header-injector/core";
+import type { HeaderEntry } from "../../../lib";
 import { For, Index, Show } from "solid-js";
 
 export interface HeaderListEditorProps {

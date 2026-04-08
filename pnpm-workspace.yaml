@@ -1,6 +1,5 @@
 packages:
   - extension
-  - packages/*
 
 catalogMode: strict
 cleanupUnusedCatalogs: true

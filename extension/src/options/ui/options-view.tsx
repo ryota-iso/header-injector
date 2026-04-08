@@ -7,7 +7,7 @@ import {
   type HeaderEntry,
   type ResourceType,
   validateSettings,
-} from "@header-injector/core";
+} from "../../lib";
 import { Show, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import { reconcile } from "solid-js/store";
 import { createStore } from "solid-js/store";

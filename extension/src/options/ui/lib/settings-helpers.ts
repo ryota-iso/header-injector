@@ -5,7 +5,7 @@ import {
   type HeaderEntry,
   type ResourceType,
   isValidMatchPattern,
-} from "@header-injector/core";
+} from "../../../lib";
 
 let headerIdCounter = 0;
 

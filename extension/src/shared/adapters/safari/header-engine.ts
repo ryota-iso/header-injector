@@ -1,5 +1,5 @@
 import { createDynamicRules, type DynamicRule, type HeaderEngine } from "../../ports/header-engine";
-import type { HeaderMutationRule } from "@header-injector/core";
+import type { HeaderMutationRule } from "../../../lib";
 
 interface DeclarativeNetRequestNamespace {
   getDynamicRules(): Promise<Array<{ id: number }>>;

@@ -6,7 +6,7 @@ import {
   type ExtensionSettings,
   type HeaderEntry,
   type ResourceType,
-} from "@header-injector/core";
+} from "../../lib";
 
 export interface KeyValueStorage {
   get<T>(key: string, fallback: T): Promise<T>;
