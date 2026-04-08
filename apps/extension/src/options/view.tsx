@@ -7,7 +7,7 @@ import {
   type HeaderEntry,
   type ResourceType,
   validateSettings,
-} from "../../core";
+} from "../core";
 import { Show, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 import { reconcile } from "solid-js/store";
 import { createStore } from "solid-js/store";
@@ -25,8 +25,8 @@ import {
   getPatternValidationStates,
   isSettingsEqual,
   replaceResourceType,
-} from "./lib/settings-helpers";
-import { toValidationMessage } from "./lib/validation-messages";
+} from "./helpers/settings-helpers";
+import { toValidationMessage } from "./helpers/validation-messages";
 
 export interface SettingsRepository {
   load(): Promise<ExtensionSettings>;

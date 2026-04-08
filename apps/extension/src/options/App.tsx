@@ -4,7 +4,7 @@ import type { ExtensionSettings } from "../core";
 
 import { ChromeSettingsRepository } from "../platforms/chrome";
 import { SafariSettingsRepository } from "../platforms/safari";
-import { OptionsView } from "./ui/options-view";
+import { OptionsView } from "./view";
 
 interface SettingsRepositoryLike {
   load(): Promise<ExtensionSettings>;

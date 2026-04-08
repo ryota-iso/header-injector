@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("./ui/options-view", () => ({
+vi.mock("./view", () => ({
   OptionsView: () => null,
 }));
 

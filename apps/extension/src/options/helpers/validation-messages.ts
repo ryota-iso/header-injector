@@ -1,4 +1,4 @@
-import type { ValidationIssue } from "../../../core";
+import type { ValidationIssue } from "../../core";
 
 export function toValidationMessage(issue: ValidationIssue): string {
   switch (issue.type) {
