@@ -49,7 +49,7 @@ async function buildTargetBundle(buildTarget) {
     },
   });
 
-  await copyFile(path.resolve(rootDir, `manifest.${buildTarget}.json`), path.resolve(outDir, "manifest.json"));
+  await copyFile(path.resolve(srcDir, `manifest.${buildTarget}.json`), path.resolve(outDir, "manifest.json"));
 }
 
 function assertBuildTarget(buildTarget) {
