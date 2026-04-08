@@ -1,4 +1,4 @@
-import { ExtensionSettingsRepository, type KeyValueStorage } from "../../ports/storage";
+import { ExtensionSettingsRepository, type KeyValueStorage } from "../ports/storage";
 
 interface StorageChange {
   newValue?: unknown;
@@ -17,14 +17,14 @@ interface StorageNamespace {
   };
 }
 
-interface ChromeExtensionLike {
+interface BrowserExtensionLike {
   storage: StorageNamespace;
 }
 
-export class ChromeStorage implements KeyValueStorage {
-  readonly #extension: ChromeExtensionLike;
+export class SafariStorage implements KeyValueStorage {
+  readonly #extension: BrowserExtensionLike;
 
-  constructor(extension = resolveChromeExtension()) {
+  constructor(extension = resolveSafariExtension()) {
     this.#extension = extension;
   }
 
@@ -54,17 +54,21 @@ export class ChromeStorage implements KeyValueStorage {
   }
 }
 
-export class ChromeSettingsRepository extends ExtensionSettingsRepository {
-  constructor(storage = new ChromeStorage()) {
+export class SafariSettingsRepository extends ExtensionSettingsRepository {
+  constructor(storage = new SafariStorage()) {
     super(storage);
   }
 }
 
-function resolveChromeExtension(): ChromeExtensionLike {
-  const extension = (globalThis as typeof globalThis & { chrome?: ChromeExtensionLike }).chrome;
+function resolveSafariExtension(): BrowserExtensionLike {
+  const globals = globalThis as typeof globalThis & {
+    browser?: BrowserExtensionLike;
+    chrome?: BrowserExtensionLike;
+  };
 
+  const extension = globals.browser ?? globals.chrome;
   if (!extension?.storage?.local || !extension.storage.onChanged) {
-    throw new Error("Chrome storage API is not available");
+    throw new Error("Safari-compatible storage API is not available");
   }
 
   return extension;

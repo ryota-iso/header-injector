@@ -2,8 +2,8 @@
 
 import type { ExtensionSettings } from "../lib";
 
-import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
-import { SafariSettingsRepository } from "../shared/adapters/safari/storage";
+import { ChromeSettingsRepository } from "../lib/chrome/storage";
+import { SafariSettingsRepository } from "../lib/safari/storage";
 import { OptionsView } from "./ui/options-view";
 
 interface SettingsRepositoryLike {

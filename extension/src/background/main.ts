@@ -1,10 +1,10 @@
 import { compileSettingsToRules, type ExtensionSettings } from "../lib";
 
-import { ChromeHeaderEngine } from "../shared/adapters/chrome/header-engine";
-import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
-import { SafariHeaderEngine } from "../shared/adapters/safari/header-engine";
-import { SafariSettingsRepository } from "../shared/adapters/safari/storage";
-import type { HeaderEngine } from "../shared/ports/header-engine";
+import { ChromeHeaderEngine } from "../lib/chrome/header-engine";
+import { ChromeSettingsRepository } from "../lib/chrome/storage";
+import { SafariHeaderEngine } from "../lib/safari/header-engine";
+import { SafariSettingsRepository } from "../lib/safari/storage";
+import type { HeaderEngine } from "../lib/ports/header-engine";
 
 interface BackgroundRuntimeEvent {
   addListener(listener: () => void): void;

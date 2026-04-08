@@ -1,4 +1,4 @@
-import { SETTINGS_STORAGE_KEY, createDefaultSettings, type ExtensionSettings } from "../../lib";
+import { SETTINGS_STORAGE_KEY, createDefaultSettings, type ExtensionSettings } from "..";
 import { describe, expect, it, vi } from "vitest";
 
 import { ExtensionSettingsRepository, type KeyValueStorage } from "./storage";
