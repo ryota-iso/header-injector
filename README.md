@@ -1,6 +1,6 @@
 # Header Injector
 
-[![CI](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml)
+[![CI](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml) [![release](https://github.com/ryota-iso/header-injector/actions/workflows/release.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/release.yml)
 
 WebExtension ベースの request header 付与ツール。
 
