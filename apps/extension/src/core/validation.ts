@@ -7,6 +7,7 @@ export type ValidationIssue =
   | { type: "invalid-pattern"; field: "includePatterns" | "excludePatterns"; pattern: string };
 
 const MATCH_PATTERN_REGEXP = /^(https?|\*):\/\/[^/\s]+\/[^\s]*$/;
+const ASCII_PRINTABLE_REGEXP = /^[\x21-\x7E]+$/;
 const HEADER_NAME_REGEXP = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
 
 export function isValidMatchPattern(pattern: string): boolean {
@@ -17,6 +18,10 @@ export function isValidMatchPattern(pattern: string): boolean {
 
   if (trimmed === "<all_urls>") {
     return true;
+  }
+
+  if (!ASCII_PRINTABLE_REGEXP.test(trimmed)) {
+    return false;
   }
 
   return MATCH_PATTERN_REGEXP.test(trimmed);

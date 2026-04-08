@@ -32,6 +32,12 @@ describe("isValidMatchPattern", () => {
     expect(isValidMatchPattern("ftp://example.com/*")).toBe(false);
     expect(isValidMatchPattern("https:///path")).toBe(false);
   });
+
+  it("非ASCII文字を含むpatternを拒否する", () => {
+    expect(isValidMatchPattern("https://例.com/*")).toBe(false);
+    expect(isValidMatchPattern("https://example.com/日本語")).toBe(false);
+    expect(isValidMatchPattern("https://example.com/path?q=テスト")).toBe(false);
+  });
 });
 
 describe("isValidHeaderName", () => {
