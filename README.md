@@ -26,7 +26,7 @@ WebExtension ベースの request header 付与ツール。
 │   │   └── src/
 │   │       ├── background/    # background script
 │   │       ├── core/          # 型, validation, rule 変換, settings repository
-│   │       ├── options/       # 設定画面 UI
+│   │       ├── ui/            # 設定画面 UI
 │   │       ├── platforms/     # Chrome / Safari 向け platform adapter
 │   │       ├── manifest.chrome.json
 │   │       └── manifest.safari.json
