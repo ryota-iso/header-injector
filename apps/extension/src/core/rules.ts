@@ -1,4 +1,5 @@
 import type { ExtensionSettings, ResourceType } from "./types";
+import { isValidHeaderName } from "./validation";
 
 export interface HeaderMutationRule {
   id: number;
@@ -42,6 +43,10 @@ export function compileSettingsToRules(settings: ExtensionSettings): HeaderMutat
 
     const trimmedName = header.name.trim();
     if (trimmedName === "") {
+      continue;
+    }
+
+    if (!isValidHeaderName(trimmedName)) {
       continue;
     }
 

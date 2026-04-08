@@ -103,4 +103,40 @@ describe("compileSettingsToRules", () => {
       ),
     ).toEqual([]);
   });
+
+  it("不正文字を含むheaderはcompile時にスキップする", () => {
+    expect(
+      compileSettingsToRules(
+        createSettings({
+          headers: [
+            { id: "space", name: "X Test", value: "ignored", enabled: true },
+            { id: "colon", name: "Content-Type:", value: "ignored", enabled: true },
+            { id: "valid", name: "X-Test", value: "kept", enabled: true },
+          ],
+        }),
+      ),
+    ).toEqual([
+      {
+        id: 1,
+        enabled: true,
+        includePatterns: [],
+        excludePatterns: [],
+        resourceTypes: ["main_frame", "xmlhttprequest"],
+        requestHeaders: [{ header: "X-Test", operation: "set", value: "kept" }],
+      },
+    ]);
+  });
+
+  it("tchar外の文字のみで構成された場合はruleを返さない", () => {
+    expect(
+      compileSettingsToRules(
+        createSettings({
+          headers: [
+            { id: "space", name: "X Test", value: "1", enabled: true },
+            { id: "multibyte", name: "X-日本語", value: "2", enabled: true },
+          ],
+        }),
+      ),
+    ).toEqual([]);
+  });
 });
