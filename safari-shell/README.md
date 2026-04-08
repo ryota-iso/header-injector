@@ -19,7 +19,7 @@ cd <repo-root>
 vp run @header-injector/extension#build:safari:ios
 ```
 
-1. `apps/safari-shell` 配下の `.xcodeproj` を Xcode で開く
+1. `safari-shell` 配下の `.xcodeproj` を Xcode で開く
 2. app target と extension target の `Signing & Capabilities` で `Team` を設定する
 3. ローカル用の `Bundle Identifier` を設定する
 4. Xcode から iPhone または iOS Simulator に Run する
@@ -37,7 +37,7 @@ vp run @header-injector/extension#build:safari:ios:rebuild
 
 ## 注意点
 
-- `apps/safari-shell` は生成物置き場で、source of truth は `apps/extension` 側にある
+- `safari-shell` は生成物置き場で、source of truth は `extension` 側にある
 - Xcode 側の手修正は署名や bundle identifier などローカル設定に限定する
 - manifest や background の変更後は `build:safari` と `build:safari:ios:rebuild` をやり直す
 - 再インストール後は iOS 側で拡張を一度 OFF/ON し直す

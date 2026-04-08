@@ -1,5 +1,5 @@
 packages:
-  - apps/*
+  - extension
   - packages/*
 
 catalogMode: strict
