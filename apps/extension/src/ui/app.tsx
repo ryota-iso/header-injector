@@ -1,16 +1,8 @@
 /** @jsxImportSource solid-js */
 
-import type { ExtensionSettings } from "../core";
-
 import { ChromeSettingsRepository } from "../platforms/chrome";
 import { SafariSettingsRepository } from "../platforms/safari";
-import { OptionsView } from "./view";
-
-interface SettingsRepositoryLike {
-  load(): Promise<ExtensionSettings>;
-  save(settings: ExtensionSettings): Promise<void>;
-  subscribe(listener: (settings: ExtensionSettings) => void): () => void;
-}
+import { ExtensionSettingsView, type SettingsRepository } from "./features/extension-settings";
 
 interface BrowserGlobals {
   browser?: unknown;
@@ -18,8 +10,8 @@ interface BrowserGlobals {
 }
 
 interface RepositoryFactories {
-  chrome: () => SettingsRepositoryLike;
-  safari: () => SettingsRepositoryLike;
+  chrome: () => SettingsRepository;
+  safari: () => SettingsRepository;
 }
 
 const defaultRepositoryFactories: RepositoryFactories = {
@@ -34,10 +26,10 @@ export function resolveBrowserTarget(globals: BrowserGlobals = globalThis as Bro
 export function createSettingsRepository(
   globals: BrowserGlobals = globalThis as BrowserGlobals,
   factories: RepositoryFactories = defaultRepositoryFactories,
-): SettingsRepositoryLike {
+): SettingsRepository {
   return resolveBrowserTarget(globals) === "safari" ? factories.safari() : factories.chrome();
 }
 
 export function App() {
-  return <OptionsView repo={createSettingsRepository()} />;
+  return <ExtensionSettingsView repo={createSettingsRepository()} />;
 }

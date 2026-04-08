@@ -27,14 +27,7 @@ describe("config", () => {
         excludePatterns: [],
         resourceTypes: [...DEFAULT_RESOURCE_TYPES],
       },
-      headers: [
-        {
-          id: "header-1",
-          name: "",
-          value: "",
-          enabled: true,
-        },
-      ],
+      headers: [],
     });
   });
 
