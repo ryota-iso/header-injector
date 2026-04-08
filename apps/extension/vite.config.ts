@@ -4,6 +4,8 @@ import { defineConfig } from "vite-plus";
 import solidPlugin from "vite-plugin-solid";
 
 export default defineConfig({
+  root: "./src",
+  publicDir: "../public",
   base: "./",
   lint: {
     ignorePatterns: ["dist/**"],

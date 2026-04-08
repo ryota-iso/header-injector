@@ -6,6 +6,7 @@ import { build } from "vite";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(dirname, "..");
+const srcDir = path.resolve(rootDir, "src");
 const viteConfigFile = path.resolve(rootDir, "vite.config.ts");
 
 const target = process.argv[2] ?? "all";
@@ -22,7 +23,7 @@ async function buildTargetBundle(buildTarget) {
   const outDir = path.resolve(rootDir, "dist", buildTarget);
 
   await build({
-    root: rootDir,
+    root: srcDir,
     configFile: viteConfigFile,
     mode: buildTarget,
     build: {
@@ -32,7 +33,7 @@ async function buildTargetBundle(buildTarget) {
   });
 
   await build({
-    root: rootDir,
+    root: srcDir,
     configFile: viteConfigFile,
     mode: buildTarget,
     publicDir: false,
@@ -40,7 +41,7 @@ async function buildTargetBundle(buildTarget) {
       outDir,
       emptyOutDir: false,
       lib: {
-        entry: path.resolve(rootDir, "background/main.ts"),
+        entry: path.resolve(srcDir, "background/main.ts"),
         formats: [buildTarget === "safari" ? "iife" : "es"],
         fileName: () => "background.js",
         name: buildTarget === "safari" ? "HeaderInjectorBackground" : undefined,
