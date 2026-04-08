@@ -47,7 +47,7 @@ export function RequestHeaders(props: RequestHeadersProps) {
       title="Request Headers"
     >
       <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white">
-        <div class="grid grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_44px] items-center gap-4 border-b border-zinc-200 bg-zinc-50/60 px-5 py-2.5 text-[11px] font-medium uppercase tracking-wider text-zinc-500">
+        <div class="grid grid-cols-[28px_minmax(0,1fr)_minmax(0,1fr)_32px] items-center gap-3 border-b border-zinc-200 bg-zinc-50/60 px-4 py-2.5 text-[11px] font-medium uppercase tracking-wider text-zinc-500">
           <span>On</span>
           <span>Name</span>
           <span>Value</span>
@@ -56,7 +56,7 @@ export function RequestHeaders(props: RequestHeadersProps) {
 
         <Show
           fallback={
-            <div class="px-5 py-10 text-center text-sm text-zinc-500">No headers configured. Click "Add Header" to add one.</div>
+            <div class="px-4 py-10 text-center text-sm text-zinc-500">No headers configured. Click "Add Header" to add one.</div>
           }
           when={props.headers.length > 0}
         >

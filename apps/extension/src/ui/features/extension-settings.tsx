@@ -110,8 +110,8 @@ export function ExtensionSettingsView(props: ExtensionSettingsProps) {
   );
 
   return (
-    <main class="min-h-screen bg-white">
-      <div class="mx-auto flex max-w-4xl flex-col gap-10 px-8 py-14">
+    <main class="bg-white">
+      <div class="flex flex-col gap-6 px-5 py-5">
         <Show when={loadError()}>
           {(message) => (
             <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">

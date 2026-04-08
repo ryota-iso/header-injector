@@ -22,7 +22,7 @@ export function HeaderRow(props: HeaderRowProps) {
 
   return (
     <div class="flex flex-col">
-      <div class="grid grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_44px] items-center gap-4 px-5 py-3">
+      <div class="grid grid-cols-[28px_minmax(0,1fr)_minmax(0,1fr)_32px] items-center gap-3 px-4 py-3">
         <Checkbox
           checked={props.header.enabled}
           label={`Toggle header ${props.header.name || "(unnamed)"}`}
@@ -52,7 +52,7 @@ export function HeaderRow(props: HeaderRowProps) {
         </div>
       </div>
 
-      <Show when={props.error}>{(message) => <p class="px-5 pb-2 text-xs text-red-600">{message()}</p>}</Show>
+      <Show when={props.error}>{(message) => <p class="px-4 pb-2 text-xs text-red-600">{message()}</p>}</Show>
     </div>
   );
 }

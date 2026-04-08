@@ -12,9 +12,9 @@ export interface SectionProps {
 
 export function Section(props: SectionProps) {
   return (
-    <section class="flex flex-col gap-4">
-      <div class="flex items-start justify-between gap-4">
-        <div class="flex flex-col gap-1">
+    <section class="@container flex flex-col gap-4">
+      <div class="flex flex-col gap-3 @[400px]:flex-row @[400px]:items-start @[400px]:justify-between @[400px]:gap-4">
+        <div class="flex min-w-0 flex-col gap-1">
           <h2 class="text-lg font-semibold text-zinc-900">{props.title}</h2>
           <Show when={props.description}>
             <p class="text-sm text-zinc-500">{props.description}</p>
