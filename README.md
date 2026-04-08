@@ -1,6 +1,6 @@
 # Header Injector
 
-[![CI](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml)
+[![CI](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/ci.yml) [![release](https://github.com/ryota-iso/header-injector/actions/workflows/release.yml/badge.svg)](https://github.com/ryota-iso/header-injector/actions/workflows/release.yml)
 
 WebExtension ベースの request header 付与ツール。
 
@@ -20,8 +20,17 @@ WebExtension ベースの request header 付与ツール。
 ```text
 .
 ├── apps/
-│   ├── extension/      # Chrome / Safari 向け拡張本体（設定画面 UI と core ロジックを含む）
-│   └── safari-shell/   # Safari iOS 向け Xcode shell
+│   ├── extension/             # Chrome / Safari 向け WebExtension 本体
+│   │   ├── public/            # 拡張用静的アセット
+│   │   ├── scripts/           # build スクリプト (Chrome / Safari / Safari iOS shell)
+│   │   └── src/
+│   │       ├── background/    # background script
+│   │       ├── core/          # 型, validation, rule 変換, settings repository
+│   │       ├── options/       # 設定画面 UI
+│   │       ├── platforms/     # Chrome / Safari 向け platform adapter
+│   │       ├── manifest.chrome.json
+│   │       └── manifest.safari.json
+│   └── safari-shell/          # Safari iOS 向け Xcode shell (build 成果物置き場)
 ├── package.json
 └── pnpm-workspace.yaml
 ```
