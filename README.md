@@ -23,8 +23,7 @@ WebExtension ベースの request header 付与ツール。
 │   ├── extension/      # Chrome / Safari 向け拡張本体
 │   └── safari-shell/   # Safari iOS 向け Xcode shell
 ├── packages/
-│   ├── core/           # 型、validation、rule 変換
-│   └── ui-options/     # 設定画面 UI
+│   └── core/           # 型、validation、rule 変換
 ├── package.json
 └── pnpm-workspace.yaml
 ```

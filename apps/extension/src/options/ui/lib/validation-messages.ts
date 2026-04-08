@@ -9,6 +9,4 @@ export function toValidationMessage(issue: ValidationIssue): string {
     case "invalid-pattern":
       return "一致パターンが不正です";
   }
-
-  throw new Error(`未対応のvalidation issue: ${JSON.stringify(issue)}`);
 }

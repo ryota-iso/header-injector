@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("@header-injector/ui-options", () => ({
-  App: () => null,
+vi.mock("./ui/options-view", () => ({
+  OptionsView: () => null,
 }));
 
 import { createSettingsRepository, resolveBrowserTarget } from "./App";

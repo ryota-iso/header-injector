@@ -34,7 +34,7 @@ export interface SettingsRepository {
   subscribe(listener: (settings: ExtensionSettings) => void): () => void;
 }
 
-export interface AppProps {
+export interface OptionsViewProps {
   repo: SettingsRepository;
 }
 
@@ -91,7 +91,7 @@ const primaryButtonStyle = {
   color: "#ffffff",
 } as const;
 
-export function App(props: AppProps) {
+export function OptionsView(props: OptionsViewProps) {
   const [savedSettings, setSavedSettings] = createStore<ExtensionSettings>({
     version: 1,
     enabled: false,
@@ -311,6 +311,7 @@ export function App(props: AppProps) {
 
   return (
     <main style={pageStyle}>
+      <h1 class="text-2xl font-bold text-red-500">test</h1>
       <Show when={loadError()}>
         {(message) => (
           <div style={{ ...bannerBaseStyle, "background-color": "#fef2f2", color: "#991b1b" }} role="alert">

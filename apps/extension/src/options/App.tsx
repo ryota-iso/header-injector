@@ -1,10 +1,10 @@
 /** @jsxImportSource solid-js */
 
 import type { ExtensionSettings } from "@header-injector/core";
-import { App as UiOptionsApp } from "@header-injector/ui-options";
 
 import { ChromeSettingsRepository } from "../shared/adapters/chrome/storage";
 import { SafariSettingsRepository } from "../shared/adapters/safari/storage";
+import { OptionsView } from "./ui/options-view";
 
 interface SettingsRepositoryLike {
   load(): Promise<ExtensionSettings>;
@@ -39,5 +39,5 @@ export function createSettingsRepository(
 }
 
 export function App() {
-  return <UiOptionsApp repo={createSettingsRepository()} />;
+  return <OptionsView repo={createSettingsRepository()} />;
 }
