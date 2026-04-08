@@ -1,9 +1,9 @@
 /** @jsxImportSource solid-js */
 
-import type { ExtensionSettings } from "../lib";
+import type { ExtensionSettings } from "../core";
 
-import { ChromeSettingsRepository } from "../lib/chrome/storage";
-import { SafariSettingsRepository } from "../lib/safari/storage";
+import { ChromeSettingsRepository } from "../core/chrome/storage";
+import { SafariSettingsRepository } from "../core/safari/storage";
 import { OptionsView } from "./ui/options-view";
 
 interface SettingsRepositoryLike {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { ExtensionSettings } from "../../../lib";
+import type { ExtensionSettings } from "../../../core";
 
 import {
   appendHeader,
