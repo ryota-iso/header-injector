@@ -1,5 +1,5 @@
 import type { ExtensionSettings, ResourceType } from "./types";
-import { isValidHeaderName } from "./validation";
+import { isValidHeaderName, isValidMatchPattern } from "./validation";
 
 export interface HeaderMutationRule {
   id: number;
@@ -31,6 +31,17 @@ export function compileSettingsToRules(settings: ExtensionSettings): HeaderMutat
   }
 
   if (settings.target.resourceTypes.length === 0) {
+    return [];
+  }
+
+  const trimmedIncludePatterns = settings.target.includePatterns.map((pattern) => pattern.trim()).filter(Boolean);
+  const trimmedExcludePatterns = settings.target.excludePatterns.map((pattern) => pattern.trim()).filter(Boolean);
+
+  if (trimmedIncludePatterns.some((pattern) => !isValidMatchPattern(pattern))) {
+    return [];
+  }
+
+  if (trimmedExcludePatterns.some((pattern) => !isValidMatchPattern(pattern))) {
     return [];
   }
 
@@ -70,8 +81,8 @@ export function compileSettingsToRules(settings: ExtensionSettings): HeaderMutat
     {
       id: 1,
       enabled: true,
-      includePatterns: settings.target.includePatterns.map((pattern) => pattern.trim()).filter(Boolean),
-      excludePatterns: settings.target.excludePatterns.map((pattern) => pattern.trim()).filter(Boolean),
+      includePatterns: trimmedIncludePatterns,
+      excludePatterns: trimmedExcludePatterns,
       resourceTypes: [...settings.target.resourceTypes],
       requestHeaders,
     },

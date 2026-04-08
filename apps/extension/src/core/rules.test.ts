@@ -139,4 +139,34 @@ describe("compileSettingsToRules", () => {
       ),
     ).toEqual([]);
   });
+
+  it("不正なinclude patternが含まれる場合はruleを返さない", () => {
+    expect(
+      compileSettingsToRules(
+        createSettings({
+          target: {
+            includePatterns: ["https://example.com/*", "https://例.com/*"],
+            excludePatterns: [],
+            resourceTypes: ["main_frame"],
+          },
+          headers: [{ id: "header", name: "X-Test", value: "1", enabled: true }],
+        }),
+      ),
+    ).toEqual([]);
+  });
+
+  it("不正なexclude patternが含まれる場合はruleを返さない", () => {
+    expect(
+      compileSettingsToRules(
+        createSettings({
+          target: {
+            includePatterns: ["https://example.com/*"],
+            excludePatterns: ["https://example.com/private/日本語/*"],
+            resourceTypes: ["main_frame"],
+          },
+          headers: [{ id: "header", name: "X-Test", value: "1", enabled: true }],
+        }),
+      ),
+    ).toEqual([]);
+  });
 });
