@@ -1,9 +1,7 @@
 import { compileSettingsToRules, type ExtensionSettings } from "../core";
 
-import { ChromeHeaderEngine } from "../core/chrome/header-engine";
-import { ChromeSettingsRepository } from "../core/chrome/storage";
-import { SafariHeaderEngine } from "../core/safari/header-engine";
-import { SafariSettingsRepository } from "../core/safari/storage";
+import { ChromeHeaderEngine, ChromeSettingsRepository } from "../platforms/chrome";
+import { SafariHeaderEngine, SafariSettingsRepository } from "../platforms/safari";
 import type { HeaderEngine } from "../core/interfaces";
 
 interface BackgroundRuntimeEvent {
