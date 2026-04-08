@@ -84,6 +84,8 @@ export function ExtensionSettingsView(props: ExtensionSettingsProps) {
     for (const issue of validationIssues()) {
       if (issue.type === "empty-header-name") {
         map.set(issue.entryId, "Header name is required");
+      } else if (issue.type === "invalid-header-name") {
+        map.set(issue.entryId, `"${issue.name}" contains invalid characters for an HTTP header name`);
       } else if (issue.type === "duplicate-header") {
         map.set(issue.entryId, `"${issue.name}" is duplicated`);
       }
