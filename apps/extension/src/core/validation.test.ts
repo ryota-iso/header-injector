@@ -48,7 +48,7 @@ describe("isValidHeaderName", () => {
     expect(isValidHeaderName("   ")).toBe(false);
     expect(isValidHeaderName("X Test")).toBe(false);
     expect(isValidHeaderName("Content-Type:")).toBe(false);
-    expect(isValidHeaderName("X-\"Quoted\"")).toBe(false);
+    expect(isValidHeaderName('X-"Quoted"')).toBe(false);
     expect(isValidHeaderName("X-日本語")).toBe(false);
   });
 });
